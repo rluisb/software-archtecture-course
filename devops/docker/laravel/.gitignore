@@ -12,4 +12,4 @@ npm-debug.log
 yarn-error.log
 .idea/*
 composer.*
-.docker/dbdata
+./devops/docker/laravel/.docker/dbdata
