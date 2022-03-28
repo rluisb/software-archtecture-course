@@ -1,14 +1,11 @@
 php:
   preset: laravel
-  enabled:
-    - alpha_ordered_imports
+  version: 8
   disabled:
-    - length_ordered_imports
-    - unused_use
+    - no_unused_imports
   finder:
     not-name:
       - index.php
-      - server.php
 js:
   finder:
     not-name:
