@@ -5,17 +5,13 @@ steps:
 - name: 'gcr.io/cloud-builders/docker'
   args:
   - 'build'
-  - '-f'
-  - '/devops'
-  - '/docker'
-  - '/cloudbuild-docker-compose'
   - '--build-arg'
   - 'version=1.24.0'
   - '-t'
   - 'gcr.io/$PROJECT_ID/docker-compose:latest'
   - '-t'
   - 'gcr.io/$PROJECT_ID/docker-compose:1.24.0'
-  - '.'
+  - './devops/docker/cloudbuild-docker-compose'
 - name: 'gcr.io/$PROJECT_ID/docker-compose'
   args: ['version']
 
