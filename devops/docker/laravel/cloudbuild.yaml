@@ -8,6 +8,22 @@ steps:
     name: 'gcr.io/cloud-builders/docker'
     args: ['ps']
 
-  - id: "Running composer"
+  - id: "Running composer install"
     name: 'gcr.io/cloud-builders/docker'
     args: ['exec', '-t', 'app', 'composer', 'install']
+
+  - id: "Copying dotEnv"
+    name: 'gcr.io/cloud-builders/docker'
+    args: ['exec', '-t', 'app', 'cp', './devops/docker/laravel/.env.example', '.env']
+
+  - id: "Running key:generate"
+    name: 'gcr.io/cloud-builders/docker'
+    args: ['exec', '-t', 'app', 'php', '/var/www/artisan', 'key:generate']
+
+  - id: "Running migrations"
+    name: 'gcr.io/cloud-builders/docker'
+    args: ['exec', '-t', 'app', 'php', '/var/www/artisa', 'migrate']
+
+  - id: "Running PHP Unit"
+    name: 'gcr.io/cloud-builders/docker'
+    args: ['exec', '-t', 'app', 'php', '/var/www/artisa/vendor/bin/phpunit', '-c', '/var/www/phpunit.xml']
