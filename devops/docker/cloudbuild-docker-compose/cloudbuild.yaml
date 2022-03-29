@@ -6,7 +6,9 @@ steps:
   args:
   - 'build'
   - '-f'
-  - '"/devops/docker/cloudbuild-docker-compose"'
+  - '/devops'
+  - '/docker'
+  - '/cloudbuild-docker-compose'
   - '--build-arg'
   - 'version=1.24.0'
   - '-t'
