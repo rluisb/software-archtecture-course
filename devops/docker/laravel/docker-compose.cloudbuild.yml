@@ -4,6 +4,12 @@ services:
   app:
     build: .
     container_name: app
+    entrypoint: dockerize -template ./.docker/app/.env:.env
+    environment:
+      - DB_HOST=db
+      - DB_DATABASE=laravel
+      - DB_USERNAME=root
+      - DB_PASSWORD=root
     volumes:
       - .:/var/www
     networks:
