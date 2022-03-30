@@ -1,33 +1,33 @@
 steps:
 
   - id: "Running docker-compose"
-    name: 'gcr.io/$PROJECT_ID/docker-compose:1.24.0'
+    name: 'docker/compose'
     args: ['-f', './devops/docker/laravel/docker-compose.cloudbuild.yml', 'up', '-d']
 
   - id: "Chown in /var/www"
-    name: 'gcr.io/cloud-builders/docker'
+    name: 'docker'
     args: ['exec','-u','root','-t','app','chown','-R','www-data:www-data','/var/www']
 
   - id: "Running docker ps"
-    name: 'gcr.io/cloud-builders/docker'
+    name: 'docker'
     args: ['ps']
 
   - id: "Running composer install"
-    name: 'gcr.io/cloud-builders/docker'
+    name: 'docker'
     args: ['exec', '-t', 'app', 'composer', 'install']
 
   - id: "Copying dotEnv"
-    name: 'gcr.io/cloud-builders/docker'
-    args: ['exec', '-t', 'app', 'cp', './devops/docker/laravel/.env.example', '.env']
+    name: 'docker'
+    args: ['exec', '-t', 'app', 'cp', './.env.example', '.env']
 
   - id: "Running key:generate"
-    name: 'gcr.io/cloud-builders/docker'
+    name: 'docker'
     args: ['exec', '-t', 'app', 'php', '/var/www/artisan', 'key:generate']
 
   - id: "Running migrations"
-    name: 'gcr.io/cloud-builders/docker'
+    name: 'docker'
     args: ['exec', '-t', 'app', 'php', '/var/www/artisan', 'migrate']
 
   - id: "Running PHP Unit"
-    name: 'gcr.io/cloud-builders/docker'
+    name: 'docker'
     args: ['exec', '-t', 'app', 'php', '/var/www/vendor/bin/phpunit', '-c', '/var/www/phpunit.xml']
