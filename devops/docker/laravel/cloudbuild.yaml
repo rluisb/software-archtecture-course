@@ -22,8 +22,8 @@ steps:
 
   - id: "Running migrations"
     name: 'gcr.io/cloud-builders/docker'
-    args: ['exec', '-t', 'app', 'php', '/var/www/artisa', 'migrate']
+    args: ['exec', '-t', 'app', 'php', '/var/www/artisan', 'migrate']
 
   - id: "Running PHP Unit"
     name: 'gcr.io/cloud-builders/docker'
-    args: ['exec', '-t', 'app', 'php', '/var/www/artisa/vendor/bin/phpunit', '-c', '/var/www/phpunit.xml']
+    args: ['exec', '-t', 'app', 'php', '/var/www/artisan/vendor/bin/phpunit', '-c', '/var/www/phpunit.xml']
