@@ -16,9 +16,9 @@ steps:
     name: 'docker'
     args: ['exec', '-t', 'app', 'composer', 'install']
 
-  # - id: "Copying dotEnv"
-  #   name: 'docker'
-  #   args: ['exec', '-t', 'app', 'cp', './.env.example', '.env']
+  - id: "Copying dotEnv"
+    name: 'docker'
+    args: ['exec', '-t', 'app', 'cp', './.docker/app/.env', '.env']
 
   - id: "Running key:generate"
     name: 'docker'
